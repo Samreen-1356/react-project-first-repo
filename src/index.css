@@ -1,0 +1,12 @@
+.pagination {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.active {
+    font-weight: bold;
+    color: red;
+}
