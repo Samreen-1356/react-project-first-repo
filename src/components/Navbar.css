@@ -1,0 +1,29 @@
+.navbar {
+    background: #222;
+    color: white;
+    padding: 15px;
+}
+
+.menu-btn {
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 0;
+}
+
+.menu a:hover {
+    color: orange;
+}

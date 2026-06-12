@@ -10,14 +10,20 @@ function AddUser() {
     } = useForm();
 
     const submitHandler = async (data) => {
+        data.id = Date.now();
         try {
-            const response = await api.post("/users/add", data);
 
-            console.log("Added User:", response.data);
+            const existingUsers =
+                JSON.parse(localStorage.getItem("users")) || [];
 
-            alert("User Added Successfully");
+            localStorage.setItem(
+                "users",
+                JSON.stringify([data, ...existingUsers])
+            );
+            alert("User added successfully");
+
         } catch (error) {
-            console.error(error);
+            console.log(error);
         }
     };
 
@@ -41,19 +47,53 @@ function AddUser() {
                 <br />
 
                 <input
-                    placeholder="Email"
+                    type="email"
                     {...register("email", {
                         required: true,
+                        pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                     })}
                 />
+
+                {errors.email && <p>Email is invalid</p>}
 
                 <br />
                 <br />
 
                 <input
-                    placeholder="Age"
-                    {...register("age")}
+                    type="number"
+                    {...register("age", {
+                        required: true,
+                        min: 1,
+                        max: 100,
+                    })}
                 />
+
+                {errors.age && <p>Enter valid age</p>}
+
+                <br />
+                <br />
+
+                <select
+                    {...register("gender", {
+                        required: true,
+                    })}
+                >
+                    <option value="">
+                        Select Gender
+                    </option>
+
+                    <option value="male">
+                        Male
+                    </option>
+
+                    <option value="female">
+                        Female
+                    </option>
+                </select>
+
+                {errors.gender && (
+                    <p>Gender Required</p>
+                )}
 
                 <br />
                 <br />
